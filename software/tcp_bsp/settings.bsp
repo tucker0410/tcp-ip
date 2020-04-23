@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 5, 2017 12:31:12 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1512451872041</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\shrey\Downloads\NSD_FINAL\software\tcp_bsp</BspGeneratedLocation>
-        <BspSettingsFile>.\settings.bsp</BspSettingsFile>
+        <BspGeneratedTimeStamp>Apr 23, 2020 2:12:29 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1587676349186</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Users\tucke\Documents\GitHub\tcp-ip\software\tcp_bsp</BspGeneratedLocation>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\final_tcp_hw.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>nios2</Cpu>
@@ -873,6 +873,42 @@
                 <Restrictions>hal.log_port must be set for this to be used.</Restrictions>
                 <Enabled>false</Enabled>
                 <Group>none</Group>
+        </Setting>
+        <Setting>
+                <SettingName>altera_eth_tse_driver_hal.autoneg_timeout</SettingName>
+                <Identifier>ALTERA_AUTONEG_TIMEOUT_THRESHOLD</Identifier>
+                <Type>DecimalNumber</Type>
+                <Value>2500</Value>
+                <DefaultValue>2500</DefaultValue>
+                <DestinationFile>public_mk_define</DestinationFile>
+                <Description>Auto Negotiation Timeout in milliseconds</Description>
+                <Restrictions>none</Restrictions>
+                <Enabled>false</Enabled>
+                <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        </Setting>
+        <Setting>
+                <SettingName>altera_eth_tse_driver_hal.checklink_timeout</SettingName>
+                <Identifier>ALTERA_CHECKLINK_TIMEOUT_THRESHOLD</Identifier>
+                <Type>DecimalNumber</Type>
+                <Value>10000</Value>
+                <DefaultValue>10000</DefaultValue>
+                <DestinationFile>public_mk_define</DestinationFile>
+                <Description>CheckLink Timeout in milliseconds</Description>
+                <Restrictions>none</Restrictions>
+                <Enabled>false</Enabled>
+                <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        </Setting>
+        <Setting>
+                <SettingName>altera_eth_tse_driver_hal.nomdio_timeout</SettingName>
+                <Identifier>ALTERA_NOMDIO_TIMEOUT_THRESHOLD</Identifier>
+                <Type>DecimalNumber</Type>
+                <Value>1000000</Value>
+                <DefaultValue>1000000</DefaultValue>
+                <DestinationFile>public_mk_define</DestinationFile>
+                <Description>"No MDIO" Timeout in microseconds</Description>
+                <Restrictions>none</Restrictions>
+                <Enabled>false</Enabled>
+                <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
         <Setting>
                 <SettingName>altera_avalon_jtag_uart_driver.enable_small_driver</SettingName>

@@ -1,9 +1,9 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="691ea5598df6dd1d301d"/>
+    <hash md5_digest_80b="f47c616a5b3ed417c336"/>
   </project>
   <file_info>
-    <file device="EP4CGX150DF31C7" path="final_project_time_limited.sof" usercode="0xFFFFFFFF"/>
+    <file device="EP4CE115F29C7" path="final_project_time_limited.sof" usercode="0xFFFFFFFF"/>
   </file_info>
   <hub_info hub_ir_width="5" ir_width="2" node_addr_width="2" node_count="2"/>
   <node_info>
@@ -100,7 +100,7 @@
     </sld_info>
     <sld_info hpath="final_tcp_hw:system_inst" name="system_inst">
       <assignment_values>
-        <assignment_value text="QSYS_NAME final_tcp_hw HAS_SOPCINFO 1 GENERATION_ID 1512154398"/>
+        <assignment_value text="QSYS_NAME final_tcp_hw HAS_SOPCINFO 1 GENERATION_ID 1587673841"/>
       </assignment_values>
       <parameters/>
     </sld_info>

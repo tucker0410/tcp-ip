@@ -7,7 +7,7 @@
 <stringAttribute key="byteStreamDeviceInstanceID" value="0"/>
 <stringAttribute key="com.altera.sbtgui.launch.REMOTE_PORT" value="56850"/>
 <booleanAttribute key="downloadProgram" value="true"/>
-<stringAttribute key="elfFile" value="C:\Users\shrey\Downloads\NSD_FINAL\software\tcp\tcp.elf"/>
+<stringAttribute key="elfFile" value="C:\Users\tucke\Documents\GitHub\tcp-ip\software\tcp\tcp.elf"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.GDB_INIT" value=""/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.commandFactory" value="com.altera.debug.cdi.gdb.plugin.Nios2GDBServerCommandFactory"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.altera.debug.cdi.gdb.plugin.Nios2GdbCdiDebugger"/>

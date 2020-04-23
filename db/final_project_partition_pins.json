@@ -16,6 +16,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "ENET_RST_N",
+					"strict" : false
+				},
+				{
 					"name" : "ENET_TX_DATA[0]",
 					"strict" : false
 				},
@@ -37,6 +41,10 @@
 				},
 				{
 					"name" : "ENET_MDIO",
+					"strict" : false
+				},
+				{
+					"name" : "KEY",
 					"strict" : false
 				},
 				{

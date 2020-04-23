@@ -1,6 +1,6 @@
 Flow report for final_project
-Sun Dec 03 20:15:18 2017
-Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+Thu Apr 23 13:53:04 2020
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
 ---------------------
@@ -29,38 +29,33 @@ functions, and any output files from any of the foregoing
 associated documentation or information are expressly subject 
 to the terms and conditions of the Intel Program License 
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
-agreement for further details.
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
 
 
 
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Dec 03 20:14:03 2017       ;
-; Quartus Prime Version              ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
+; Flow Status                        ; Successful - Thu Apr 23 13:52:52 2020       ;
+; Quartus Prime Version              ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; final_project                               ;
 ; Top-level Entity Name              ; final_project                               ;
-; Family                             ; Cyclone IV GX                               ;
-; Device                             ; EP4CGX150DF31C7                             ;
+; Family                             ; Cyclone IV E                                ;
+; Device                             ; EP4CE115F29C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 10,426 / 149,760 ( 7 % )                    ;
-;     Total combinational functions  ; 7,949 / 149,760 ( 5 % )                     ;
-;     Dedicated logic registers      ; 7,322 / 149,760 ( 5 % )                     ;
-; Total registers                    ; 7334                                        ;
-; Total pins                         ; 19 / 508 ( 4 % )                            ;
+; Total logic elements               ; 10,500 / 114,480 ( 9 % )                    ;
+;     Total combinational functions  ; 7,958 / 114,480 ( 7 % )                     ;
+;     Dedicated logic registers      ; 7,323 / 114,480 ( 6 % )                     ;
+; Total registers                    ; 7335                                        ;
+; Total pins                         ; 19 / 529 ( 4 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 2,709,766 / 6,635,520 ( 41 % )              ;
-; Embedded Multiplier 9-bit elements ; 6 / 720 ( < 1 % )                           ;
-; Total GXB Receiver Channel PCS     ; 0 / 8 ( 0 % )                               ;
-; Total GXB Receiver Channel PMA     ; 0 / 8 ( 0 % )                               ;
-; Total GXB Transmitter Channel PCS  ; 0 / 8 ( 0 % )                               ;
-; Total GXB Transmitter Channel PMA  ; 0 / 8 ( 0 % )                               ;
-; Total PLLs                         ; 2 / 8 ( 25 % )                              ;
+; Total memory bits                  ; 2,709,766 / 3,981,312 ( 68 % )              ;
+; Embedded Multiplier 9-bit elements ; 6 / 532 ( 1 % )                             ;
+; Total PLLs                         ; 2 / 4 ( 50 % )                              ;
 +------------------------------------+---------------------------------------------+
 
 
@@ -69,7 +64,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/03/2017 19:45:53 ;
+; Start date & time ; 04/23/2020 13:49:13 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; final_project       ;
 +-------------------+---------------------+
@@ -80,7 +75,7 @@ agreement for further details.
 +-------------------------------------+----------------------------------------------------------------+---------------+--------------+----------------+
 ; Assignment Name                     ; Value                                                          ; Default Value ; Entity Name  ; Section Id     ;
 +-------------------------------------+----------------------------------------------------------------+---------------+--------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 207732452313632.151231054800224                                ; --            ; --           ; --             ;
+; COMPILER_SIGNATURE_ID               ; 167300355669902.158767495310592                                ; --            ; --           ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; None                                                           ; --            ; --           ; eda_simulation ;
 ; EDA_TIME_SCALE                      ; 1 ps                                                           ; --            ; --           ; eda_simulation ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                             ; --            ; --           ; --             ;
@@ -102,7 +97,7 @@ agreement for further details.
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                                                   ; --            ; --           ; --             ;
 ; SLD_FILE                            ; final_tcp_hw/synthesis/final_tcp_hw.regmap                     ; --            ; --           ; --             ;
 ; SLD_FILE                            ; final_tcp_hw/synthesis/final_tcp_hw.debuginfo                  ; --            ; --           ; --             ;
-; SLD_INFO                            ; QSYS_NAME final_tcp_hw HAS_SOPCINFO 1 GENERATION_ID 1512154398 ; --            ; final_tcp_hw ; --             ;
+; SLD_INFO                            ; QSYS_NAME final_tcp_hw HAS_SOPCINFO 1 GENERATION_ID 1587673841 ; --            ; final_tcp_hw ; --             ;
 ; SOPCINFO_FILE                       ; final_tcp_hw/synthesis/../../final_tcp_hw.sopcinfo             ; --            ; --           ; --             ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                             ; --            ; --           ; --             ;
 +-------------------------------------+----------------------------------------------------------------+---------------+--------------+----------------+
@@ -113,11 +108,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:13:30     ; 1.0                     ; 1101 MB             ; 00:12:23                           ;
-; Fitter                    ; 00:11:56     ; 1.1                     ; 1712 MB             ; 00:14:12                           ;
-; Assembler                 ; 00:01:03     ; 1.0                     ; 723 MB              ; 00:00:51                           ;
-; TimeQuest Timing Analyzer ; 00:01:08     ; 1.3                     ; 998 MB              ; 00:01:10                           ;
-; Total                     ; 00:27:37     ; --                      ; --                  ; 00:28:36                           ;
+; Analysis & Synthesis      ; 00:01:59     ; 1.0                     ; 5135 MB             ; 00:02:13                           ;
+; Fitter                    ; 00:01:14     ; 1.2                     ; 6190 MB             ; 00:02:23                           ;
+; Assembler                 ; 00:00:06     ; 1.0                     ; 4757 MB             ; 00:00:06                           ;
+; TimeQuest Timing Analyzer ; 00:00:11     ; 1.6                     ; 5049 MB             ; 00:00:14                           ;
+; Total                     ; 00:03:30     ; --                      ; --                  ; 00:04:56                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -126,10 +121,10 @@ agreement for further details.
 +---------------------------+------------------+------------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +---------------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis      ; ArjunPC          ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter                    ; ArjunPC          ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler                 ; ArjunPC          ; Windows 10 ; 10.0       ; x86_64         ;
-; TimeQuest Timing Analyzer ; ArjunPC          ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis      ; Tuckers-Acer     ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter                    ; Tuckers-Acer     ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler                 ; Tuckers-Acer     ; Windows 10 ; 10.0       ; x86_64         ;
+; TimeQuest Timing Analyzer ; Tuckers-Acer     ; Windows 10 ; 10.0       ; x86_64         ;
 +---------------------------+------------------+------------+------------+----------------+
 
 
