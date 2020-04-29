@@ -16,7 +16,7 @@ struct segment{
 	unsigned char syn[2];
 	unsigned char fin[2];
 	unsigned char data[2];
-	unsigned char checksum;
+	//unsigned char checksum;
 };
 
 struct packet{

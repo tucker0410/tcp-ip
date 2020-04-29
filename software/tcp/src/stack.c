@@ -6,8 +6,8 @@
  */
 
 #include <altera_avalon_sgdma.h>
-#include <altera_avalon_sgdma_descriptor.h>//include the sgdma descriptor
-#include <altera_avalon_sgdma_regs.h>//include the sgdma registers
+#include <altera_avalon_sgdma_descriptor.h>	//include the sgdma descriptor
+#include <altera_avalon_sgdma_regs.h>		//include the sgdma registers
 #include <altera_avalon_pio_regs.h>
 #include <altera_avalon_timer.h>
 #include <altera_avalon_timer_regs.h>
@@ -130,6 +130,7 @@ int accept(int device){
 		sentPacket = pack;
 		transmit(device, pack);
 		//return 1;
+		//return 1;
 	}
 
 	unsigned char * ack;
@@ -145,6 +146,7 @@ int accept(int device){
 
 int recv(int device){
 	unsigned char * recvData;
+	//signed char * recvData;
 	recvData = receive(device);
 	if(recvData[32]!= 0x02){
 		//Store Data
@@ -172,10 +174,10 @@ int disconnect(int device){
 	IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER_BASE , 0xFFFF);
 	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0004);
 
-	unsigned char * dcnt;
+	unsigned char * discon_temp;
 
-	dcnt = receive(device);
-	if(dcnt[32]==0x02){
+	discon_temp = receive(device);
+	if(discon_temp[32]==0x02){
 		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0008);
 		IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_BASE, 0x0002);
 		printf("Disconnected");
@@ -197,86 +199,87 @@ int recDisconnect(int device){
 
 int main(void){
 	//TODO:
+	while(1){
+		//sentPacket = (struct packet*)malloc(sizeof(struct packet));
+		pack = (struct packet*)malloc(sizeof(struct packet));
+		conn = (struct segment*)malloc(sizeof(struct segment));
+		// IP addressed must be set here
+		//int *array = malloc(10 * sizeof(int));
+		unsigned char * IP1= malloc(4 * sizeof(unsigned char));
+		//{0xC0,0xA8,0x01,0x01};	//192.168.1.1  //new is 169.254.54.102
+		IP1[0] = 0xA9;
+		IP1[1] = 0xFE;
+		IP1[2] = 0x36;
+		IP1[3] = 0x66;
+		//{0xC0,0xA8,0x01,0x02}; 	//192.168.1.2
+		unsigned char * IP2= malloc(4 * sizeof(unsigned char));
+		IP2[0] = 0xA9;
+		IP2[1] = 0xFE;
+		IP2[2] = 0x6F;
+		IP2[3] = 0xEF;
 
-	//sentPacket = (struct packet*)malloc(sizeof(struct packet));
-	pack = (struct packet*)malloc(sizeof(struct packet));
-	conn = (struct segment*)malloc(sizeof(struct segment));
+		unsigned char * sPort = malloc(2 * sizeof(unsigned char)); //set aside spot for both port values
+		sPort[0] = 0x27;
+		sPort[1] = 0x0F;			//9999
 
-	//int *array = malloc(10 * sizeof(int));
-	unsigned char * IP1= malloc(4 * sizeof(unsigned char));
-	//{0xC0,0xA8,0x01,0x01};//192.168.1.1
-	IP1[0] = 0xC0;
-	IP1[1] = 0xA8;
-	IP1[2] = 0x01;
-	IP1[3] = 0x01;
-	//{0xC0,0xA8,0x01,0x02};//192.168.1.2
-	unsigned char * IP2= malloc(4 * sizeof(unsigned char));
-	IP2[0] = 0xC0;
-	IP2[1] = 0xA8;
-	IP2[2] = 0x01;
-	IP2[3] = 0x02;
+		unsigned char * dPort = malloc(2 * sizeof(unsigned char));
+		dPort[0] = 0x23;
+		dPort[1] = 0x82;			//9090
 
-	unsigned char * sPort = malloc(2 * sizeof(unsigned char));
-	sPort[0] = 0x27;
-	sPort[1] = 0x0F;//9999
+		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0000);
+		IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_BASE, 0x0000);
 
-	unsigned char * dPort = malloc(2 * sizeof(unsigned char));
-	dPort[0] = 0x23;
-	dPort[1] = 0x82;//9090
+		buffer[0] = 0xAA;
+		buffer[1] = 0xBB;
+		buffer[2] = 0xCC;
+		buffer[3] = 0xDD;
+		buffer[4] = 0xEE;
 
-	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0000);
-	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_BASE, 0x0000);
+		int transmit = IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE); //read the input from the switch
+		int isConnected = 0;
+		printf("transmit is: %d\n", transmit);
 
-	buffer[0] = 0xAA;
-	buffer[1] = 0xBB;
-	buffer[2] = 0xCC;
-	buffer[3] = 0xDD;
-	buffer[4] = 0xEE;
+		if(transmit){
+			isConnected = connect(A,IP1, sPort, IP2, dPort);
+			if(isConnected){
+				int j = 0;
+				while(j < 5){
+					int sent = 0;
+					sent = send(A, buffer[j]);
+					if(sent){
+						j++;
+					}
+					else {
+						printf("ACK NOT RECEIVED");
+						fflush(stdout);
+					}
 
-	int transmit = IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE); //read the input from the switch
-	int isConnected = 0;
-
-	if(transmit){
-		isConnected = connect(A,IP1, sPort, IP2, dPort);
-		if(isConnected){
-			int j = 0;
-			while(j < 5){
-				int sent = 0;
-				sent = send(A, buffer[j]);
-				if(sent){
-					j++;
 				}
-				else {
-					printf("ACK NOT RECEIVED");
-					fflush(stdout);
-				}
-
+				disconnect(A);
 			}
-			disconnect(A);
+		}
+		else {
+			int conn = accept(B);
+			if(conn){
+				printf("Connection Successful");
+				fflush(stdout);
+				printf("Receiving data");
+				fflush(stdout);
+				int k = 0;
+				while(k < 5){
+					int rec = 0;
+					rec = recv(B);
+					if(rec){
+						k++;
+					}
+				}
+				recDisconnect(B);
+			}
+			else{
+				printf("Connection Failed at Receiver");
+				fflush(stdout);
+			}
 		}
 	}
-	else {
-		int conn = accept(B);
-		if(conn){
-			printf("Connection Successful");
-			fflush(stdout);
-			printf("Receiving data");
-			fflush(stdout);
-			int k = 0;
-			while(k < 5){
-				int rec = 0;
-				rec = recv(B);
-				if(rec){
-					k++;
-				}
-			}
-			recDisconnect(B);
-		}
-		else{
-			printf("Connection Failed at Receiver");
-			fflush(stdout);
-		}
-	}
-
 	return 0;
 }

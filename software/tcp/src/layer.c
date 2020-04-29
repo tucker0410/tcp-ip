@@ -6,9 +6,9 @@
  */
 
 #include <altera_avalon_sgdma.h>
-#include <altera_avalon_sgdma_descriptor.h>//include the sgdma descriptor
-#include <altera_avalon_sgdma_regs.h>//include the sgdma registers
-#include <altera_avalon_pio_regs.h>//include the PIO registers
+#include <altera_avalon_sgdma_descriptor.h>	//include the sgdma descriptor
+#include <altera_avalon_sgdma_regs.h>		//include the sgdma registers
+#include <altera_avalon_pio_regs.h>			//include the PIO registers
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
@@ -35,9 +35,9 @@ unsigned char tx_frame[1024] = {0x00,0x00,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xC8,0x1
 // Triple-speed Ethernet MegaCore base address
 volatile int * tse = (int *) TSE_BASE;
 
-int count = 0;
+int count = 0; /////////////////////////////////////////////////////////////////////////////////////////////
 //Other variables
-int in=0;
+int in = 0;
 
 // Create sgdma transmit and receive devices
 alt_sgdma_dev * sgdma_tx_dev;
@@ -94,7 +94,8 @@ int transmit(int device, struct packet * pack){
 
 	// Software reset the PHY chip and wait
 	*(tse + 0x02) =  0x00802220;
-	while ( *(tse + 0x02) != ( 0x00800220 ) ) alt_printf("Setting the reset");
+	alt_printf("Setting the reset");
+	while ( *(tse + 0x02) != ( 0x00800220 ) ) printf("... ");
 
 	//Enable read and write transfers, gigabit Ethernet operation and promiscuous mode
 
@@ -122,6 +123,7 @@ int transmit(int device, struct packet * pack){
 	memset(tx_frame+33, 0, 28);
 
 	// Set interrupts for the sgdma transmit device
+	//sgdma_tx_dev searches for sgdma_tx device, returns null if none,
 	alt_avalon_sgdma_register_callback(sgdma_tx_dev, (alt_avalon_sgdma_callback) tx_ethernet_isr, 0x00000014, NULL );
 
 	// Create sgdma transmit descriptor
@@ -136,9 +138,6 @@ int transmit(int device, struct packet * pack){
 }
 
 
-/********************************************************************************
- * This program demonstrates use of the Ethernet in the DE2i-150 board.
- ********************************************************************************/
 char * receive(int device){
 
 	// Open the sgdma receive device
@@ -171,14 +170,14 @@ char * receive(int device){
 	while ( *(tse + 0x02) != ( *(tse +0x02 ) | 0x00800220));
 
 	//MAC FIFO Configuration
-	*(tse + 0x09) = TSE_TRANSMIT_FIFO_DEPTH-16;//tx_section_empty
-	*(tse + 0x0E ) = 0x03;//tx_almost_full
-	*(tse + 0x0D ) = 0x08;//tx_almost_empty
-	*(tse + 0x07 ) = TSE_RECEIVE_FIFO_DEPTH-16;//rx_section_empty
-	*(tse + 0x0C ) = 0x08;//rx_almost_full
-	*(tse + 0x0B ) = 0x08;//rx_almost_empty
-	*(tse + 0x0A ) = 0x00;//tx_section_full
-	*(tse + 0x08 ) = 0x00;//rx_section_full
+	*(tse + 0x09) = TSE_TRANSMIT_FIFO_DEPTH-16;	//tx_section_empty
+	*(tse + 0x0E ) = 0x03;						//tx_almost_full
+	*(tse + 0x0D ) = 0x08;						//tx_almost_empty
+	*(tse + 0x07 ) = TSE_RECEIVE_FIFO_DEPTH-16;	//rx_section_empty
+	*(tse + 0x0C ) = 0x08;						//rx_almost_full
+	*(tse + 0x0B ) = 0x08;						//rx_almost_empty
+	*(tse + 0x0A ) = 0x00;						//tx_section_full
+	*(tse + 0x08 ) = 0x00;						//rx_section_full
 
 	// Initialize the MAC address
 	if(!device){
@@ -199,7 +198,8 @@ char * receive(int device){
 
 	// Software reset the PHY chip and wait
 	*(tse + 0x02) =  0x00802220;
-	while ( *(tse + 0x02) != ( 0x00800220 ) ) alt_printf("Setting the reset");
+	alt_printf("Setting the reset");
+	while ( *(tse + 0x02) != ( 0x00800220 )) printf("... ") ;
 
 	// Enable read and write transfers, gigabit Ethernet operation and promiscuous mode
 
@@ -233,12 +233,12 @@ void rx_ethernet_isr (void *context)
 	}
 	else {
 		alt_dcache_flush_all();
-		alt_printf( "Destination address: %x:%x:%x:%x:%x:%x\n", rx_frame[2], rx_frame[3], rx_frame[4], rx_frame[5],rx_frame[6], rx_frame[7] );
-		alt_printf( "Source address: %x:%x:%x:%x:%x:%x\n", rx_frame[8], rx_frame[9], rx_frame[10], rx_frame[11],rx_frame[12], rx_frame[13] );
-		alt_printf( "Length: %x%x\nSource IP: %x.%x.%x.%x\n", rx_frame[14], rx_frame[15], rx_frame[16], rx_frame[17],rx_frame[18], rx_frame[19] );
-		alt_printf( "Destination IP: %x.%x.%x.%x\nSource Port: %x:%x\n", rx_frame[20], rx_frame[21], rx_frame[22], rx_frame[23],rx_frame[24], rx_frame[25] );
-		alt_printf( "Destination Port: %x:%x\nSYN: %x\nFIN: %x\nSequence Number: %x\nAck Number: %x\n", rx_frame[26], rx_frame[27], rx_frame[28], rx_frame[29],rx_frame[30], rx_frame[31] );
-		alt_printf( "Data: %x\n", rx_frame[32]);
+		printf( "Destination address: %x:%x:%x:%x:%x:%x\n", rx_frame[2], rx_frame[3], rx_frame[4], rx_frame[5],rx_frame[6], rx_frame[7] );
+		printf( "Source address: %x:%x:%x:%x:%x:%x\n", rx_frame[8], rx_frame[9], rx_frame[10], rx_frame[11],rx_frame[12], rx_frame[13] );
+		printf( "Length: %x%x\nSource IP: %d.%d.%d.%d\n", rx_frame[14], rx_frame[15], rx_frame[16], rx_frame[17],rx_frame[18], rx_frame[19] );
+		printf( "Destination IP: %d%d%d%d\nSource Port: %d:%d\n", rx_frame[20], rx_frame[21], rx_frame[22], rx_frame[23],rx_frame[24], rx_frame[25] );
+		printf( "Destination Port: %d:%d\nSYN: %x\nFIN: %x\nSequence Number: %x\nAck Number: %x\n", rx_frame[26], rx_frame[27], rx_frame[28], rx_frame[29],rx_frame[30], rx_frame[31] );
+		printf( "Data: %x\n", rx_frame[32]);
 		alt_dcache_flush_all();
 		//alt_printf( "MAC ADDRESS 0: %x \n", *(tse + 0x18) );
 		//alt_printf( "Successful frames: %x \n", *(tse + 0x1A) );
@@ -264,17 +264,16 @@ void rx_ethernet_isr (void *context)
 void tx_ethernet_isr (void *context){
 
 	transmissionStatus = 1;
-
-	alt_printf("Destination address: %x,%x,%x,%x,%x,%x \n", tx_frame[2], tx_frame[3], tx_frame[4], tx_frame[5],tx_frame[6], tx_frame[7] );
-	alt_printf("Source address: %x,%x,%x,%x,%x,%x\n", tx_frame[8], tx_frame[9], tx_frame[10], tx_frame[11], tx_frame[12], tx_frame[13] );
-	alt_printf("Source IP: %x%x%x%x\n", tx_frame[16], tx_frame[17], tx_frame[18], tx_frame[19]);
-	alt_printf("Destination IP: %x%x%x%x\n", tx_frame[20], tx_frame[21], tx_frame[22], tx_frame[23]);
-	alt_printf("Source Port: %x%x%\n Destination Port: %x%x%\n ", tx_frame[24], tx_frame[25], tx_frame[26], tx_frame[27]);
-	alt_printf("SYN: %x FIN: %x%\n Seq: %x Ack: %x%\n ", tx_frame[28], tx_frame[29], tx_frame[30], tx_frame[31]);
-	alt_printf("Data: %x%\n ", tx_frame[32]);
-	alt_printf("Frames Transmitted: %x\n", *(tse + 0x1A) );
-	alt_printf("Pause Frames Transmitted: %x \n", *(tse + 0x20));
-	alt_printf("Config Reg: %x\n", *(tse + 0x02));
+	printf("Destination address: %x.%x.%x.%x.%x.%x \n", tx_frame[2], tx_frame[3], tx_frame[4], tx_frame[5],tx_frame[6], tx_frame[7] );
+	printf("Source address: %x.%x.%x.%x.%x.%x\n", tx_frame[8], tx_frame[9], tx_frame[10], tx_frame[11], tx_frame[12], tx_frame[13] );
+	printf("Source IP: %d.%d.%d.%d\n", tx_frame[16], tx_frame[17], tx_frame[18], tx_frame[19]);
+	printf("Destination IP: %d.%d.%d.%d\n", tx_frame[20], tx_frame[21], tx_frame[22], tx_frame[23]);
+	printf("Source Port: %d%d%\n Destination Port: %d%d%\n ", tx_frame[24], tx_frame[25], tx_frame[26], tx_frame[27]);
+	printf("SYN: %x FIN: %x%\n Seq: %x Ack: %x%\n ", tx_frame[28], tx_frame[29], tx_frame[30], tx_frame[31]);
+	printf("Data: %x%\n ", tx_frame[32]);
+	printf("Frames Transmitted: %x\n", *(tse + 0x1A) );
+	printf("Pause Frames Transmitted: %x \n", *(tse + 0x20));
+	printf("Config Register: 0x%x\n", *(tse + 0x02));
 
 	// Wait until transmit descriptor transfer is complete
 	while (alt_avalon_sgdma_check_descriptor_status(&tx_descriptor) != 0)
