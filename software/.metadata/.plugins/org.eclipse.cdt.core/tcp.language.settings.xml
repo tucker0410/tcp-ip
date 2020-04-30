@@ -1756,6 +1756,24 @@
 						<entry kind="macro" name="ALT_SINGLE_THREADED" value=""/>
 						<entry kind="macro" name="__hal__" value=""/>
 					</resource>
+					<resource project-relative-path="src/main.c">
+						<entry kind="includePath" name="/tcp_bsp/drivers/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="includePath" name="/tcp_bsp/HAL/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="includePath" name="/tcp_bsp">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="macro" name="ALTERA_AUTONEG_TIMEOUT_THRESHOLD" value="2500"/>
+						<entry kind="macro" name="ALTERA_CHECKLINK_TIMEOUT_THRESHOLD" value="10000"/>
+						<entry kind="macro" name="ALTERA_NOMDIO_TIMEOUT_THRESHOLD" value="1000000"/>
+						<entry kind="macro" name="ALTERA_TRIPLE_SPEED_MAC" value=""/>
+						<entry kind="macro" name="ALT_NO_INSTRUCTION_EMULATION" value=""/>
+						<entry kind="macro" name="ALT_SINGLE_THREADED" value=""/>
+						<entry kind="macro" name="__hal__" value=""/>
+					</resource>
 					<resource project-relative-path="HAL/src/alt_remap_cached.c">
 						<entry kind="includePath" name="/tcp_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
@@ -2099,6 +2117,24 @@
 						<entry kind="macro" name="__hal__" value=""/>
 					</resource>
 					<resource project-relative-path="HAL/src/alt_write.c">
+						<entry kind="includePath" name="/tcp_bsp/drivers/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="includePath" name="/tcp_bsp/HAL/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="includePath" name="/tcp_bsp">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="macro" name="ALTERA_AUTONEG_TIMEOUT_THRESHOLD" value="2500"/>
+						<entry kind="macro" name="ALTERA_CHECKLINK_TIMEOUT_THRESHOLD" value="10000"/>
+						<entry kind="macro" name="ALTERA_NOMDIO_TIMEOUT_THRESHOLD" value="1000000"/>
+						<entry kind="macro" name="ALTERA_TRIPLE_SPEED_MAC" value=""/>
+						<entry kind="macro" name="ALT_NO_INSTRUCTION_EMULATION" value=""/>
+						<entry kind="macro" name="ALT_SINGLE_THREADED" value=""/>
+						<entry kind="macro" name="__hal__" value=""/>
+					</resource>
+					<resource project-relative-path="src/functions.c">
 						<entry kind="includePath" name="/tcp_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>

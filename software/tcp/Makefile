@@ -142,8 +142,8 @@ ACDS_VERSION := 17.0
 ELF := tcp.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS += src/layer.c
-C_SRCS += src/stack.c
+C_SRCS += src/main.c
+C_SRCS += src/functions.c
 CXX_SRCS :=
 ASM_SRCS :=
 
