@@ -237,8 +237,9 @@ int main(void){
 
 		int transmit = IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE); //read the input from the switch
 		int isConnected = 0;
-		printf("transmit is: %d\n", transmit);
 
+		while(1){
+		transmit = IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE);
 		if(transmit){
 			isConnected = connect(A,IP1, sPort, IP2, dPort);
 			if(isConnected){
@@ -280,6 +281,7 @@ int main(void){
 				fflush(stdout);
 			}
 		}
+	}
 	}
 	return 0;
 }

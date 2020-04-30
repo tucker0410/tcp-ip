@@ -20,7 +20,6 @@
 #include "sys/alt_irq.h"
 #include "system.h"
 
-
 // Function Prototypes
 void rx_ethernet_isr (void *context);
 void tx_ethernet_isr (void *context);
@@ -94,8 +93,8 @@ int transmit(int device, struct packet * pack){
 
 	// Software reset the PHY chip and wait
 	*(tse + 0x02) =  0x00802220;
-	alt_printf("Setting the reset");
-	while ( *(tse + 0x02) != ( 0x00800220 ) ) printf("... ");
+	alt_printf("Setting the reset tx");
+	while ( *(tse + 0x02) != ( 0x00800220 ) ) printf(" ");
 
 	//Enable read and write transfers, gigabit Ethernet operation and promiscuous mode
 
@@ -198,15 +197,15 @@ char * receive(int device){
 
 	// Software reset the PHY chip and wait
 	*(tse + 0x02) =  0x00802220;
-	alt_printf("Setting the reset");
-	while ( *(tse + 0x02) != ( 0x00800220 )) printf("... ") ;
+	alt_printf("Setting the reset rx");
+	while ( *(tse + 0x02) != ( 0x00800220 )) printf(" ") ;
 
 	// Enable read and write transfers, gigabit Ethernet operation and promiscuous mode
 
 	*(tse + 0x02) = *(tse + 0x02) | 0x0080023B;//3rd bit changed to 0/8
-
+	printf( "OR while loop\n");
 	while ( *(tse + 0x02) != ( *(tse + 0x02) | 0x0080023B ) );
-
+	printf (" FINISH OR while loop \n");
 
 	while (1) {
 		in=IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE); //read the input from the switch
@@ -233,11 +232,11 @@ void rx_ethernet_isr (void *context)
 	}
 	else {
 		alt_dcache_flush_all();
-		printf( "Destination address: %x:%x:%x:%x:%x:%x\n", rx_frame[2], rx_frame[3], rx_frame[4], rx_frame[5],rx_frame[6], rx_frame[7] );
-		printf( "Source address: %x:%x:%x:%x:%x:%x\n", rx_frame[8], rx_frame[9], rx_frame[10], rx_frame[11],rx_frame[12], rx_frame[13] );
-		printf( "Length: %x%x\nSource IP: %d.%d.%d.%d\n", rx_frame[14], rx_frame[15], rx_frame[16], rx_frame[17],rx_frame[18], rx_frame[19] );
-		printf( "Destination IP: %d%d%d%d\nSource Port: %d:%d\n", rx_frame[20], rx_frame[21], rx_frame[22], rx_frame[23],rx_frame[24], rx_frame[25] );
-		printf( "Destination Port: %d:%d\nSYN: %x\nFIN: %x\nSequence Number: %x\nAck Number: %x\n", rx_frame[26], rx_frame[27], rx_frame[28], rx_frame[29],rx_frame[30], rx_frame[31] );
+		printf( "Destination address: %x.%x.%x.%x.%x.%x\n", rx_frame[2], rx_frame[3], rx_frame[4], rx_frame[5],rx_frame[6], rx_frame[7] );
+		printf( "Source address: %x.%x.%x.%x.%x.%x\n", rx_frame[8], rx_frame[9], rx_frame[10], rx_frame[11],rx_frame[12], rx_frame[13] );
+		printf( "Length: %d%d\nSource IP: %d.%d.%d.%d\n", rx_frame[14], rx_frame[15], rx_frame[16], rx_frame[17],rx_frame[18], rx_frame[19] );
+		printf( "Destination IP: %d.%d.%d.%d\nSource Port: %d%d\n", rx_frame[20], rx_frame[21], rx_frame[22], rx_frame[23],rx_frame[24], rx_frame[25] );
+		printf( "Destination Port: %d%d\nSYN: %x\nFIN: %x\nSequence Number: %x\nAck Number: %x\n", rx_frame[26], rx_frame[27], rx_frame[28], rx_frame[29],rx_frame[30], rx_frame[31] );
 		printf( "Data: %x\n", rx_frame[32]);
 		alt_dcache_flush_all();
 		//alt_printf( "MAC ADDRESS 0: %x \n", *(tse + 0x18) );
