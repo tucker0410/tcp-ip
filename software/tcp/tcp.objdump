@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   9 .debug_aranges 00000fd0  00000000  00000000  000160a8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_info   0002778f  00000000  00000000  00017078  2**0
+ 10 .debug_info   00027790  00000000  00000000  00017078  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_abbrev 00009e97  00000000  00000000  0003e807  2**0
+ 11 .debug_abbrev 00009e97  00000000  00000000  0003e808  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0000c38c  00000000  00000000  0004869e  2**0
+ 12 .debug_line   0000c38c  00000000  00000000  0004869f  2**0
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_frame  00002680  00000000  00000000  00054a2c  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -2870,28 +2870,35 @@ int main(void){
    8183c:	01000084 	movi	r4,2
    81840:	00826580 	call	82658 <malloc>
    81844:	e0bff915 	stw	r2,-28(fp)
-		sPort[0] = 0x27;
+		//sPort[0] = 0x27;
+		//sPort[1] = 0x0F;			//9999
+		sPort[0] = 99;
    81848:	e0bff917 	ldw	r2,-28(fp)
-   8184c:	00c009c4 	movi	r3,39
+   8184c:	00c018c4 	movi	r3,99
    81850:	10c00005 	stb	r3,0(r2)
-		sPort[1] = 0x0F;			//9999
+		sPort[1] = 99;
    81854:	e0bff917 	ldw	r2,-28(fp)
    81858:	10800044 	addi	r2,r2,1
-   8185c:	00c003c4 	movi	r3,15
+   8185c:	00c018c4 	movi	r3,99
    81860:	10c00005 	stb	r3,0(r2)
+		//printf("sPort 0, then 1 are = %d, %d", sPort[0], sPort[1]);
+		//printf("sport = %d", *sPort);
+		//printf("sport = %d", &sPort);
 
 		unsigned char * dPort = malloc(2 * sizeof(unsigned char));
    81864:	01000084 	movi	r4,2
    81868:	00826580 	call	82658 <malloc>
    8186c:	e0bffa15 	stw	r2,-24(fp)
-		dPort[0] = 0x23;
+		//dPort[0] = 0x23;
+		//dPort[1] = 0x82;			//9090
+		dPort[0] = 90;
    81870:	e0bffa17 	ldw	r2,-24(fp)
-   81874:	00c008c4 	movi	r3,35
+   81874:	00c01684 	movi	r3,90
    81878:	10c00005 	stb	r3,0(r2)
-		dPort[1] = 0x82;			//9090
+		dPort[1] = 90;
    8187c:	e0bffa17 	ldw	r2,-24(fp)
    81880:	10800044 	addi	r2,r2,1
-   81884:	00ffe084 	movi	r3,-126
+   81884:	00c01684 	movi	r3,90
    81888:	10c00005 	stb	r3,0(r2)
 
 		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0000);

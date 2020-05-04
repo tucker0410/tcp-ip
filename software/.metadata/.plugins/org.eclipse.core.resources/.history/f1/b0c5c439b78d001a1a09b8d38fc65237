@@ -221,19 +221,18 @@ int main(void){
 		IP2[3] = 0xEF;
 
 		unsigned char * sPort = malloc(2 * sizeof(unsigned char)); //set aside spot for both port values
-		//sPort[0] = 0x27;
-		//sPort[1] = 0x0F;			//9999
-		sPort[0] = 99;
-		sPort[1] = 99;
-		//printf("sPort 0, then 1 are = %d, %d", sPort[0], sPort[1]);
-		//printf("sport = %d", *sPort);
-		//printf("sport = %d", &sPort);
+		sPort[0] = 0x27;
+		sPort[1] = 0x0F;			//9999
+		//sPort[0] = 99;
+		//sPort[1] = 99;
+		printf("sPort 0, then 1 are = %d, %d", sPort[0], sPort[1]);
+		printf("sport = %d", sPort);
 
 		unsigned char * dPort = malloc(2 * sizeof(unsigned char));
-		//dPort[0] = 0x23;
-		//dPort[1] = 0x82;			//9090
-		dPort[0] = 90;
-		dPort[1] = 90;
+		dPort[0] = 0x23;
+		dPort[1] = 0x82;			//9090
+		//dPort[0] = 90;
+		//dPort[1] = 90;
 
 		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0000);
 		IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_BASE, 0x0000);

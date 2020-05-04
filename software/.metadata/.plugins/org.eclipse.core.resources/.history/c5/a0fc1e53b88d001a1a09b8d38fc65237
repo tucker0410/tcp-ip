@@ -225,9 +225,9 @@ int main(void){
 		//sPort[1] = 0x0F;			//9999
 		sPort[0] = 99;
 		sPort[1] = 99;
-		//printf("sPort 0, then 1 are = %d, %d", sPort[0], sPort[1]);
-		//printf("sport = %d", *sPort);
-		//printf("sport = %d", &sPort);
+		printf("sPort 0, then 1 are = %d, %d", sPort[0], sPort[1]);
+		printf("sport = %d", *sPort);
+		printf("sport = %d", &sPort);
 
 		unsigned char * dPort = malloc(2 * sizeof(unsigned char));
 		//dPort[0] = 0x23;
