@@ -1,10 +1,3 @@
-/*
- * stack.c
- *
- *  Created on: Nov 10, 2017
- *      Author: shreytej
- */
-
 #include <altera_avalon_sgdma.h>
 #include <altera_avalon_sgdma_descriptor.h>	//include the sgdma descriptor
 #include <altera_avalon_sgdma_regs.h>		//include the sgdma registers
@@ -13,23 +6,28 @@
 #include <altera_avalon_timer_regs.h>
 #include <string.h>
 #include <stdio.h>
-#include "../include/layer.h"
+#include <unistd.h>
 #include "sys/alt_stdio.h"
 #include "system.h"
-
-#define A 0
-#define B 1
-
-int isConnected;
-unsigned char buffer[5];
+#include "../include/seg.h"
 
 struct packet * sentPacket;
 struct packet * pack;
 struct segment * conn;
+
 int seqNumber = 0x00;
 int ackNumber = 0x00;
-
 int timer;
+int isConnected;
+unsigned char buffer[5];
+
+#define A 0
+#define B 1
+
+char * receive(int device);
+int transmit(int device, struct packet * pack);
+void rx_ethernet_isr (void *context);
+void tx_ethernet_isr (void *context);
 
 int connect(int device, unsigned char * sourceIP, unsigned char * sourcePort, unsigned char * destinationIP, unsigned char * destinationPort){
 	printf("connect function\n");
@@ -107,9 +105,7 @@ int send(int device, unsigned char data){
 	}
 }
 
-
 int accept(int device){
-	//TODO: Check if destIP, port is myIP, port
 	printf("accept function\n");
 	unsigned char * request;
 	request = receive(device);
@@ -202,47 +198,31 @@ int recDisconnect(int device){
 int main(void){
 	printf("System Initialize.\n");
 	while(1){
-		//sentPacket = (struct packet*)malloc(sizeof(struct packet));
 		pack = (struct packet*)malloc(sizeof(struct packet));
 		conn = (struct segment*)malloc(sizeof(struct segment));
 		// IP addressed must be set here
-		//int *array = malloc(10 * sizeof(int));
-		unsigned char * IP1= malloc(4 * sizeof(unsigned char));
-		//{0xC0,0xA8,0x01,0x01};	//192.168.1.1  //new is 169.254.54.102
+		unsigned char * IP1 = malloc(4 * sizeof(unsigned char));
+		//new is 169.254.54.102
 		IP1[0] = 0xA9;
 		IP1[1] = 0xFE;
 		IP1[2] = 0x36;
 		IP1[3] = 0x66;
-		//{0xC0,0xA8,0x01,0x02}; 	//192.168.1.2
-		unsigned char * IP2= malloc(4 * sizeof(unsigned char));
-		IP2[0] = 0xA9;
-		IP2[1] = 0xFE;
-		IP2[2] = 0x6F;
-		IP2[3] = 0xEF;
+		//192.168.1.2
+		unsigned char * IP2 = malloc(4 * sizeof(unsigned char));
+		IP2[0] = 0xa;
+		IP2[1] = 0x0;
+		IP2[2] = 0x0;
+		IP2[3] = 0x34;
 
 		unsigned char * sPort = malloc(2 * sizeof(unsigned char)); //set aside spot for both port values
-		//sPort[0] = 0x27;
-		//sPort[1] = 0x0F;			//9999
-		sPort[0] = 99;
+		sPort[0] = 99;		//9999
 		sPort[1] = 99;
-		//printf("sPort 0, then 1 are = %d, %d", sPort[0], sPort[1]);
-		//printf("sport = %d", *sPort);
-		//printf("sport = %d", &sPort);
 
 		unsigned char * dPort = malloc(2 * sizeof(unsigned char));
-		//dPort[0] = 0x23;
-		//dPort[1] = 0x82;			//9090
-		dPort[0] = 90;
+		dPort[0] = 90;		//9090
 		dPort[1] = 90;
-
 		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x0000);
 		IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_BASE, 0x0000);
-
-		buffer[0] = 0xAA;
-		buffer[1] = 0xBB;
-		buffer[2] = 0xCC;
-		buffer[3] = 0xDD;
-		buffer[4] = 0xEE;
 
 		int transmit = IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE); //read the input from the switch
 		int isConnected = 0;

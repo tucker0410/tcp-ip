@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 30, 2020 11:00:28 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1588269628324</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>May 5, 2020 10:59:26 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1588701566369</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\tucke\Documents\GitHub\tcp-ip\software\tcp_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\final_tcp_hw.sopcinfo</SopcDesignFile>

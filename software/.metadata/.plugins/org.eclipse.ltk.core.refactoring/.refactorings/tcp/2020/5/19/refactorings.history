@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;tcp/include/stack.h&apos; to &apos;seg.h&apos;" description="Rename resource &apos;stack.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="include/stack.h" name="seg.h" stamp="1588701709705" updateReferences="true"/>
+</session>

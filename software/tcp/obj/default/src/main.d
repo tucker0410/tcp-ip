@@ -11,8 +11,7 @@ obj/default/src/main.o: src/main.c \
  ../tcp_bsp//drivers/inc/altera_avalon_timer.h \
  ../tcp_bsp//HAL/inc/sys/alt_warning.h \
  ../tcp_bsp//drivers/inc/altera_avalon_timer_regs.h \
- src/../include/layer.h src/../include/stack.h \
- ../tcp_bsp//HAL/inc/sys/alt_stdio.h
+ ../tcp_bsp//HAL/inc/sys/alt_stdio.h src/../include/seg.h
 
 ../tcp_bsp//drivers/inc/altera_avalon_sgdma.h:
 
@@ -46,8 +45,6 @@ obj/default/src/main.o: src/main.c \
 
 ../tcp_bsp//drivers/inc/altera_avalon_timer_regs.h:
 
-src/../include/layer.h:
-
-src/../include/stack.h:
-
 ../tcp_bsp//HAL/inc/sys/alt_stdio.h:
+
+src/../include/seg.h:
